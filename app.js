@@ -6,6 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const userRoute = require('./api/routes/user');
+const fileRoute = require('./api/routes/files');
 const bookRoute = require('./api/routes/book');
 const User = require('./api/models/User');
 const Book = require('./api/models/Book');
@@ -18,7 +19,8 @@ mongoose.connection.on('open', () => {
 })
 app.use(bodyParser.json());
 app.use(morgan('common', {stream: accessLogStream}, {flags: 'a'}))
-
+// app.use('/files', express.static('files'))
 app.use('/api/books', bookRoute);
 app.use('/api/user', userRoute);
+app.use('/api/files', fileRoute);
 module.exports = app;
